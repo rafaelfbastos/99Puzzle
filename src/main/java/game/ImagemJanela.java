@@ -16,7 +16,7 @@ public class ImagemJanela extends JFrame {
         setPreferredSize(new Dimension(700, 600));
         setLocation(300, 100);
         this.setIconImage(Recursos.getInstance().getIcon());
-        JPanel panelImg = new JPanel(new GridLayout(0, 3));
+        JPanel panelImg = new JPanel(new GridLayout(0, 2));
         this.setLayout(new BorderLayout());
         configButtons();
         for (JRadioButton radioButton : radioButtons) {
@@ -41,15 +41,16 @@ public class ImagemJanela extends JFrame {
     public void configButtons() {
         radioButtons = new ArrayList<>();
         ArrayList<String> boards = new ArrayList<>(Recursos.getInstance().getBoards());
-        for (int i=0;i<boards.size(); i++) {
-            String board = boards.get(i);
-            JRadioButton button = new JRadioButton(new ImageIcon(Recursos.getInstance().getMiniaturas()[i].getScaledInstance(200,200,Image.SCALE_DEFAULT)));
-            button.addActionListener(e -> {
-                Main.janela.reiniciarImg(board);
+        boards.forEach((board)->{
+            JRadioButton rb = new JRadioButton(board);
+            rb.setFont(Recursos.getInstance().getSubTituloFont());
+            rb.addActionListener(e -> {
+                Recursos.getInstance().setSprite(board);
+                Main.janela.render();
                 dispose();
             });
-            radioButtons.add(button);
-        }
+            radioButtons.add(rb);
+        });
     }
 
 }

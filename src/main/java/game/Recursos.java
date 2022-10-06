@@ -44,7 +44,6 @@ public class Recursos {
     private Clip winClip;
     private Image icon;
     private ArrayList<String> boards;
-    private BufferedImage[] miniaturas;
 
 
     public Recursos(){
@@ -52,7 +51,7 @@ public class Recursos {
                 Arrays.asList("Darth Vader","Lion","MK Logo","Pikachu","Sub-Zero","Yoda","Luffy",
                         "Darth Vader Helmet","Death Star","Naruto","Iron Man","Dragon")
         );
-        miniaturas = new BufferedImage[boards.size()];
+
         jogador = new ScoreModel();
         modoJogo = "numerico";
         jogadas = 0;
@@ -85,9 +84,6 @@ public class Recursos {
             swapPecasClip.open(swapPecas);
             silenceClip.start();
 
-            for (int i = 0; i <boards.size() ; i++) {
-              miniaturas[i] = ImageIO.read(getClass().getResource(String.format("/img/%s.png",boards.get(i))));
-            }
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -280,7 +276,4 @@ public class Recursos {
         }
     }
 
-    public BufferedImage[] getMiniaturas() {
-        return miniaturas;
-    }
 }
